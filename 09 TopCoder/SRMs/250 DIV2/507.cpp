@@ -18,14 +18,6 @@
 #include <cstdlib>
 #include <ctime>
 
-
-/// Info.
-///****************************************************************************************************************************************///
-/// Author                : BAHAA El_DEEN OSAMA
-/// Date                  : 7/9/2020
-///****************************************************************************************************************************************///
-
-
 using namespace std;
 
 
@@ -33,23 +25,26 @@ class CubeAnts {
 public:
 	int getMinimumSteps(vector <int> pos) {
 	   sort(pos.begin(),pos.end());
-	      int res=0;
-	      if(pos[pos.size()-1] == 0)
+	      int res=-1;
+	      for(int i=0;i<pos.size();i++)
 	      {
-	        res =0;
-	      }
-	      else if (pos[pos.size()-1] == 1 || pos[pos.size()-1] == 3 || pos[pos.size()-1] == 4 )
-	      {
-	        res=1;
-	      }						
-	      else if(pos[pos.size()-1] == 2  || pos[pos.size()-1] == 5 || pos[pos.size()-1] == 7)												
-	      {
-	        res=2; 
-	      }
-	      else if(pos[pos.size()-1] == 6)
-	      {
-	       res=3;
-	      }
+	        if(pos[i]==0)
+	        {
+	         res = max(res,0); 
+	        }
+	        else if(pos[i]==3 || pos[i]==1 ||pos[i]==4 )
+	        {
+	           res= max(res,1);
+	        }
+	        else if(pos[i]==2 ||pos[i]==5||pos[i]==7)
+	        {
+	           res = max(res,2); 
+	        }
+	        else if(pos[i]==6)
+	        {
+	          res = max(res,3);
+	        }
+	      }  
 	      
 	      return res;		
 	}
