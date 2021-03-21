@@ -22,7 +22,7 @@ main()
 {
     FasterIO;
     cin>>T;
-    while(T)
+    while(T--)
     {
     cin>>n>>k;
     rep(i,0,n){cin>>arr[i];}
