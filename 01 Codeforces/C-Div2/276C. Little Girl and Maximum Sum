@@ -1,0 +1,63 @@
+/*
+ *  Motivation : Hard work beats talent when talent fails to work hard
+ *  Author : Bahaa El-Deen osama.
+ *  Date   : 2/5/2021
+ *  Topic  : Binary index tree.
+ */
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef long long ll;
+
+const int N = 2e5 + 5;
+
+struct BIT
+{
+    int tree[N];
+    void init()
+    {
+        memset(tree, 0, sizeof tree);
+    }
+    void add(int pos, int val)
+    {
+        for(++pos;pos<=N; pos+= (pos)&(-pos))
+            tree[pos-1] += val;
+    }
+    int get(int pos) /// return sum of pos element.
+    {
+        int ret = 0;
+        for(++pos ; pos ; pos -= (pos & (-pos)))
+            ret += tree[pos - 1];
+        return ret;
+    }
+}bit;
+
+int arr[N];
+int new_arr[N];
+ll n,q,l,r,ret(0);
+int main()
+{
+
+    scanf("%d%d",&n,&q);
+    for (int i=0;i<n;i++) scanf("%I64d",&arr[i]);
+    sort(arr,arr+n);
+    while (q--)
+    {
+        scanf("%d%d",&l,&r);
+        bit.add(l,1);
+        bit.add(r+1,-1);
+    }
+    for (int i=1;i<=n;i++)
+    {
+        new_arr[i-1] =bit.get(i);
+    }
+    sort(new_arr,new_arr+n);
+    for (int i=n-1;i>=0;i--)
+    {
+        ret += arr[i] * 1ll *new_arr[i];
+    }
+    cout << ret << endl;
+
+    return 0;
+}
