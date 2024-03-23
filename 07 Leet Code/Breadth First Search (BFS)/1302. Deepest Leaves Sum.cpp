@@ -12,31 +12,10 @@
 class Solution {
 public:
 
-    int deapLevel(TreeNode* node){
-        int level = 0;
-        int Qsize = 0;
-        queue<TreeNode*>q;
-        q.push(node);
-
-        while(!q.empty())
-        {
-            Qsize = q.size();
-            while(Qsize--)
-            {
-                TreeNode*current =  q.front();
-                q.pop();
-                if(current->left)q.push(current->left);
-                if(current->right)q.push(current->right);
-            }
-            ++level;
-        }
-
-        return level;
-    }
+ 
     int deepestLeavesSum(TreeNode* root) {
         
-        int Lastlevel = deapLevel(root);
-        int currLevel = 0;
+      
         int sumLastLevel=0;
 
         queue<TreeNode*>q;
@@ -45,19 +24,15 @@ public:
         while(!q.empty())
         {
             int Qsize = q.size(); 
+            sumLastLevel = 0;
             while(Qsize--)
             {
                 TreeNode*current =  q.front();
                 q.pop();
-
+                sumLastLevel+=current->val;
                 if(current->left)q.push(current->left);
                 if(current->right)q.push(current->right);
-                if(currLevel == Lastlevel-1){
-                    sumLastLevel+=current->val;
-                }
             }
-
-            currLevel++;
         }
 
 
