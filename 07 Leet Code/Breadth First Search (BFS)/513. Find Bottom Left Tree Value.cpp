@@ -12,60 +12,30 @@
 class Solution {
 public:
 
- int maxDepth(TreeNode* root) {
-
-        if (root == nullptr)
-            return 0;
-
-        queue<TreeNode*> q;
-        q.push(root);
-        int levels = 0;
-        while (!q.empty()) {
-
-            int Qsize = q.size();
-            ++levels;
-            while (Qsize--) {
-                 
-                TreeNode* curr = q.front();q.pop();
-                if(curr->left)q.push(curr->left);
-                if(curr->right)q.push(curr->right);
-            }
-        }
-
-        return levels;
-    }
-
     int findBottomLeftValue(TreeNode* root) {
-    
-        int Targetlevel = maxDepth(root);
-        int currLevel = 0;
-
+ 
         int leftMostValue = -1;
-
         queue<TreeNode*>q;
         q.push(root);
 
         while(!q.empty())
         {
             int Qsize=q.size();
-            ++currLevel;
+            bool flag = true;
             while(Qsize--)
             {
                 TreeNode* curr  = q.front();q.pop();
 
                 if(curr->left)q.push(curr->left);
-                if(currLevel==Targetlevel)
+                if(flag)
                 {
                     leftMostValue = curr->val;
-                    return leftMostValue;
+                    flag = false;
 
                 }
                 if(curr->right)q.push(curr->right);
             }
         }
-
-
-
 
         return leftMostValue;
     }
